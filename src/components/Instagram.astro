@@ -1,17 +1,25 @@
 ---
-/**
- * Instagram セクション
- * プロフィールへのリンク・フォローボタンを表示
- *
- * 特定の投稿を埋め込む場合は、Instagram の「埋め込み」コードを
- * 下記コメント箇所に貼り付けてください。
- */
+// Instagram セクション
+//
+// 実際の投稿画像をグリッドで表示するには Behold.so を使用します。
+//
+// 【設定手順】
+// 1. https://behold.so にアクセスしてアカウント作成（無料プランあり）
+// 2. Instagram アカウント @yreee22 を連携する
+// 3. ダッシュボードで「Feed」を作成し、Feed ID（例: ABCDE12345）をコピー
+// 4. 下記 BEHOLD_FEED_ID にその ID を貼り付ける（例: 'ABCDE12345'）
+//
+// BEHOLD_FEED_ID が空の場合はプレースホルダーグリッドを表示します。
 
-const INSTAGRAM_URL = 'https://www.instagram.com/yreee22?igsh=NHo0c2NhMGN3bWpz';
+const BEHOLD_FEED_ID   = 'wCR9k9BbcVI5OZMvoAwA';   // ← Behold.so の Feed ID を入れる
+const INSTAGRAM_URL    = 'https://www.instagram.com/yreee22?igsh=NHo0c2NhMGN3bWpz';
 const INSTAGRAM_HANDLE = '@yreee22';
+
+// Behold.so を使用するかどうか
+const useBeholdWidget = BEHOLD_FEED_ID.length > 0;
 ---
 
-<section class="insta-section">
+<section id="instagram" class="insta-section">
   <div class="insta-inner">
     <div class="insta-header">
       <div>
@@ -29,48 +37,66 @@ const INSTAGRAM_HANDLE = '@yreee22';
       </a>
     </div>
 
-    <!--
-      ── Instagram 埋め込みを追加する方法 ──
-      1. 埋め込みたい投稿を Instagram で開く
-      2. 右上「…」→「埋め込む」→コードをコピー
-      3. 下記エリアに貼り付け
-      例:
-      <blockquote
-        class="instagram-media"
-        data-instgrm-permalink="https://www.instagram.com/p/XXXXX/"
-        ...
-      ></blockquote>
-      <script async src="//www.instagram.com/embed.js"></script>
-    -->
-
-    <!-- プレースホルダーグリッド（実際の投稿埋め込み後は削除） -->
-    <div class="insta-grid" aria-label="Instagram 投稿グリッド（プレースホルダー）">
-      {Array.from({ length: 6 }).map((_, i) => (
-        <a
-          href={INSTAGRAM_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="insta-tile"
-          aria-label={`Instagram 投稿 ${i + 1}（${INSTAGRAM_HANDLE}）`}
-        >
-          <span class="insta-tile-label" aria-hidden="true">Instagram</span>
-        </a>
-      ))}
-    </div>
+    {useBeholdWidget ? (
+      /* ── Behold.so ウィジェット（実際の Instagram 画像を表示） ── */
+      <div class="behold-wrap">
+        <behold-widget feed-id={`${BEHOLD_FEED_ID}`}></behold-widget>
+        <script>
+          (() => {
+            const d=document,s=d.createElement("script");s.type="module";
+            s.src="https://w.behold.so/widget.js";d.head.append(s);
+          })();
+        </script>
+      </div>
+    ) : (
+      /* ── プレースホルダーグリッド（Behold未設定時） ── */
+      <div class="insta-placeholder">
+        <div class="insta-grid" aria-label="Instagram 投稿グリッド（プレースホルダー）">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="insta-tile"
+              aria-label={`Instagram 投稿 ${i + 1}（${INSTAGRAM_HANDLE}）`}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1"
+                aria-hidden="true"
+                class="insta-icon"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <circle cx="12" cy="12" r="5"></circle>
+                <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"></circle>
+              </svg>
+            </a>
+          ))}
+        </div>
+        <div class="placeholder-note">
+          <p>
+            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="insta-handle">{INSTAGRAM_HANDLE}</a>
+            で最新の演奏・日常を発信中
+          </p>
+        </div>
+      </div>
+    )}
 
     <p class="insta-caption">
       演奏動画や日常の様子を発信しています。<br>
-      <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="insta-handle">{INSTAGRAM_HANDLE}</a>
-      をフォローしてご覧ください。
+      フォローしてご覧ください。
     </p>
   </div>
 </section>
 
 <style>
   .insta-section {
-    background: var(--cream-light);
-    border-top: 1px solid var(--border-light);
-    border-bottom: 1px solid var(--border-light);
+    /* 白背景 */
   }
 
   .insta-inner {
@@ -104,11 +130,22 @@ const INSTAGRAM_HANDLE = '@yreee22';
     white-space: nowrap;
   }
 
-  /* ── グリッド ── */
+  /* ── Behold ウィジェット ── */
+  .behold-wrap {
+    width: 100%;
+  }
+
+  /* ── プレースホルダーグリッド ── */
   .insta-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: clamp(8px, 1.4vw, 14px);
+  }
+
+  @media (max-width: 480px) {
+    .insta-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   .insta-tile {
@@ -126,18 +163,20 @@ const INSTAGRAM_HANDLE = '@yreee22';
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    transition: opacity 0.25s;
+    color: #c4b49a;
+    transition: opacity 0.25s, color 0.25s;
   }
 
   .insta-tile:hover {
-    opacity: 0.75;
+    opacity: 0.8;
+    color: var(--wine);
   }
 
-  .insta-tile-label {
-    font-size: 11px;
-    color: #a4977f;
-    letter-spacing: 0.08em;
-    font-family: ui-monospace, monospace;
+  .placeholder-note {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 14px;
+    color: var(--text-muted);
   }
 
   /* ── キャプション ── */

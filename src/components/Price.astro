@@ -43,7 +43,7 @@ const notes = [
     <div class="price-header">
       <p class="sec-en">Price</p>
       <h2 class="sec-title">料金システム</h2>
-      <p class="price-note">入会金はいただきません。表示はすべて税込・月謝制です。</p>
+      <p class="price-note">入会金はいただきません。表示はすべて税込・月謝制です。前月末までのお支払いをお願いいたします。</p>
     </div>
 
     <!-- クラリネット個人レッスン -->
@@ -55,7 +55,6 @@ const notes = [
         <div class="plan-card">
           <div class="plan-duration">
             <span class="duration-num">{group.duration}</span>
-            <span class="duration-unit">1回あたり</span>
           </div>
           <div class="plan-rows">
             {group.plans.map(p => (
@@ -123,24 +122,66 @@ const notes = [
       </div>
     </div>
 
-    <!-- ご案内 -->
-    <div class="price-notes">
-      <p class="notes-heading">ご案内</p>
-      <ul class="notes-list">
-        {notes.map(note => (
-          <li><span class="notes-bullet" aria-hidden="true">—</span><span>{note}</span></li>
-        ))}
-      </ul>
+    <!-- 全コース共通のご案内 -->
+    <div class="price-notes-wrap">
+      <div class="notes-divider">
+        <span class="notes-divider-line" aria-hidden="true"></span>
+        <p class="notes-divider-label">全コース共通のご案内</p>
+        <span class="notes-divider-line" aria-hidden="true"></span>
+      </div>
+      <div class="price-notes">
+        <ul class="notes-list">
+          {notes.map(note => (
+            <li><span class="notes-bullet" aria-hidden="true">—</span><span>{note}</span></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- 紹介キャンペーン -->
+    <div class="campaign-wrap">
+      <div class="campaign-divider">
+        <span class="campaign-divider-line" aria-hidden="true"></span>
+        <p class="campaign-divider-label">紹介キャンペーン</p>
+        <span class="campaign-divider-line" aria-hidden="true"></span>
+      </div>
+      <div class="campaign-card">
+        <div class="campaign-header">
+          <span class="campaign-badge">実施中</span>
+          <p class="campaign-title">ご紹介でレッスン1回分が無料に</p>
+        </div>
+        <p class="campaign-desc">
+          在籍中の生徒さんが新しい方をご紹介くださった場合、<strong>紹介した方・紹介された方の双方に1回分のレッスンを無料</strong>で行わせていただきます。
+        </p>
+        <div class="campaign-benefits">
+          <div class="campaign-benefit">
+            <p class="benefit-role">紹介した方</p>
+            <p class="benefit-detail">4カ月目のレッスン<strong>1回分が無料</strong></p>
+          </div>
+          <div class="campaign-benefit-divider" aria-hidden="true">＋</div>
+          <div class="campaign-benefit">
+            <p class="benefit-role">紹介された方</p>
+            <p class="benefit-detail">4カ月目のレッスン<strong>1回分が無料</strong></p>
+          </div>
+        </div>
+        <p class="campaign-note">※ ご紹介された方が3カ月継続された場合、4カ月目に適用となります。詳しくはお問い合わせください。</p>
+      </div>
     </div>
 
     <div class="price-cta">
-      <a href="#contact" class="btn-primary">このプランで申し込む →</a>
+      <a href="#contact" class="btn-primary">申し込む →</a>
     </div>
   </div>
 </section>
 
 <style>
   .price-section {
+    background: var(--cream-light);
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .price-inner {
     max-width: var(--max-w);
     margin: 0 auto;
     padding: var(--py) var(--px);
@@ -198,8 +239,9 @@ const notes = [
   }
 
   .plan-card {
-    background: var(--cream-light);
+    background: var(--cream);
     border: 1px solid var(--border);
+    border-top: 3px solid var(--wine);
     padding: clamp(22px, 3vw, 30px);
   }
 
@@ -215,8 +257,8 @@ const notes = [
   .duration-num {
     font-family: var(--font-serif-ja);
     font-weight: 600;
-    font-size: 26px;
-    color: var(--navy);
+    font-size: 32px;
+    color: var(--wine);
   }
 
   .duration-unit {
@@ -250,9 +292,12 @@ const notes = [
   }
 
   .plan-save {
-    font-size: 11.5px;
-    color: var(--wine);
-    letter-spacing: 0.04em;
+    display: inline-block;
+    background: var(--wine);
+    color: var(--cream);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    padding: 2px 7px;
   }
 
   /* ── 特別コード（学生・ピアノ・出張）共通 ── */
@@ -263,7 +308,7 @@ const notes = [
     align-items: center;
     justify-content: space-between;
     gap: 16px 28px;
-    background: var(--cream-light);
+    background: var(--cream);
     border: 1px solid var(--border);
     border-left: 3px solid var(--wine);
     padding: clamp(22px, 3vw, 30px);
@@ -319,18 +364,19 @@ const notes = [
   /* ── 価格共通 ── */
   .price-num {
     font-family: var(--font-serif-ja);
-    font-size: 23px;
-    font-weight: 600;
-    color: var(--navy);
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--wine);
   }
 
   .special-price-wrap .price-num {
-    font-size: 30px;
+    font-size: 48px;
   }
 
   .price-unit {
-    font-size: 13px;
-    color: var(--navy);
+    font-size: 15px;
+    color: var(--wine);
+    font-weight: 600;
   }
 
   .price-unit-sub {
@@ -339,21 +385,155 @@ const notes = [
     margin-left: 4px;
   }
 
-  /* ── ご案内 ── */
-  .price-notes {
-    background: var(--cream-light);
-    border: 1px solid var(--border);
-    padding: clamp(22px, 3vw, 30px);
-    margin-top: clamp(20px, 3vw, 28px);
+  /* ── 紹介キャンペーン ── */
+  .campaign-wrap {
+    margin-top: clamp(46px, 7vw, 70px);
   }
 
-  .notes-heading {
+  /* 区切り線ラベル */
+  .campaign-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: clamp(18px, 2.5vw, 26px);
+  }
+
+  .campaign-divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .campaign-divider-label {
     font-family: var(--font-serif-ja);
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13.5px;
     color: var(--wine);
+    letter-spacing: 0.18em;
+    white-space: nowrap;
+    margin: 0;
+  }
+
+  /* キャンペーンカード */
+  .campaign-card {
+    background: #f5eaec;
+    border: 1px solid rgba(110, 42, 54, 0.22);
+    padding: clamp(24px, 3.5vw, 38px);
+  }
+
+  .campaign-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .campaign-badge {
+    display: inline-block;
+    background: var(--wine);
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    padding: 4px 12px;
+    flex-shrink: 0;
+  }
+
+  .campaign-title {
+    font-family: var(--font-serif-ja);
+    font-weight: 600;
+    font-size: 19px;
+    color: var(--wine);
+    letter-spacing: 0.06em;
+    margin: 0;
+  }
+
+  .campaign-desc {
+    font-size: 13.5px;
+    line-height: 1.95;
+    color: var(--text-muted);
+    margin: 0 0 22px;
+  }
+
+  /* 特典ボックス */
+  .campaign-benefits {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 3vw, 32px);
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(110, 42, 54, 0.15);
+    padding: clamp(18px, 2.5vw, 26px);
+    margin-bottom: 16px;
+  }
+
+  .campaign-benefit {
+    flex: 1 1 180px;
+    text-align: center;
+  }
+
+  .benefit-role {
+    font-size: 12px;
     letter-spacing: 0.1em;
-    margin: 0 0 14px;
+    color: var(--wine);
+    font-weight: 600;
+    margin: 0 0 6px;
+  }
+
+  .benefit-detail {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .campaign-benefit-divider {
+    font-size: 20px;
+    color: var(--wine);
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+
+  .campaign-note {
+    font-size: 12px;
+    color: var(--text-faint);
+    letter-spacing: 0.03em;
+    margin: 0;
+  }
+
+  /* ── 全コース共通のご案内 ── */
+  .price-notes-wrap {
+    margin-top: clamp(46px, 7vw, 70px);
+  }
+
+  /* 区切り線 + ラベル */
+  .notes-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: clamp(18px, 2.5vw, 26px);
+  }
+
+  .notes-divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .notes-divider-label {
+    font-family: var(--font-serif-ja);
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--wine);
+    letter-spacing: 0.18em;
+    white-space: nowrap;
+    margin: 0;
+  }
+
+  .price-notes {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    padding: clamp(22px, 3vw, 30px);
   }
 
   .notes-list {

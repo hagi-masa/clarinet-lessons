@@ -99,14 +99,14 @@ const MAIL_HREF        = `mailto:${CONTACT_EMAIL}?subject=${MAIL_SUBJECT}`;
 </section>
 
 <!-- フォーム送信処理（メールクライアントを起動） -->
-<script>
+<script lang="ts">
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
 
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const data = new FormData(form);
-    const get  = (key: string) => (data.get(key) as string ?? '').trim();
+    const data = new FormData(form as HTMLFormElement);
+    const get  = (key: string) => ((data.get(key) as string) ?? '').trim();
 
     const name    = get('name');
     const email   = get('email');
@@ -138,9 +138,7 @@ const MAIL_HREF        = `mailto:${CONTACT_EMAIL}?subject=${MAIL_SUBJECT}`;
 
 <style>
   .contact-section {
-    background: var(--cream-light);
-    border-top: 1px solid var(--border-light);
-    border-bottom: 1px solid var(--border-light);
+    /* 白背景 */
     color: var(--text);
   }
 
@@ -202,7 +200,7 @@ const MAIL_HREF        = `mailto:${CONTACT_EMAIL}?subject=${MAIL_SUBJECT}`;
     width: 100%;
     padding: 13px 14px;
     border: 1px solid #d9cdb6;
-    background: var(--cream);
+    background: var(--cream-light);
     color: var(--text);
     font-size: 15px;
     border-radius: 2px;

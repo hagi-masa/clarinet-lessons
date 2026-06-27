@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "PowerShell(Get-ChildItem \"c:\\\\Users\\\\hagino\\\\Documents\\\\HP制作\\\\dist\" -Recurse | Where-Object { !$_.PSIsContainer } | Select-Object Name, @{N='Size\\(KB\\)';E={[math]::Round\\($_.Length/1KB,1\\)}} | Sort-Object Name)"
-    ]
-  }
-}

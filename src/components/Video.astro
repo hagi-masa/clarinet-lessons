@@ -1,15 +1,21 @@
 ---
-/**
- * 演奏動画セクション
- * YouTube チャンネルへのリンクと埋め込みプレースホルダー
- *
- * TODO: 特定の動画を埋め込む場合は YOUTUBE_VIDEO_ID に YouTube 動画IDを設定してください
- *       例: 'dQw4w9WgXcQ'（URLの?v=以降の文字列）
- */
+// 演奏動画セクション
+// YouTube チャンネルの最新動画を常にiframeで表示する
+//
+// 特定の動画を埋め込む場合は YOUTUBE_VIDEO_ID に動画IDを設定してください
+// 動画IDは URL https://www.youtube.com/watch?v=XXXXX の XXXXX 部分です
 
-// YouTube 動画IDを設定すると動画が埋め込まれます（空文字列の場合はリンク表示）
-const YOUTUBE_VIDEO_ID = '';
+// 動画IDを設定するとその動画を単体で表示（おすすめ）
+const YOUTUBE_VIDEO_ID = '1p_ka8vr7IQ';
+
+// チャンネルのハンドル（@を除く）
+const YOUTUBE_CHANNEL_HANDLE = 'yurieshiraishiclarinet';
 const YOUTUBE_CHANNEL_URL = 'https://youtube.com/@yurieshiraishiclarinet';
+
+// 埋め込みURL: 動画IDがあれば個別動画を、なければチャンネルの最新動画リストを表示
+const embedSrc = YOUTUBE_VIDEO_ID
+  ? `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?rel=0&modestbranding=1`
+  : `https://www.youtube.com/embed?listType=user_uploads&list=${YOUTUBE_CHANNEL_HANDLE}`;
 ---
 
 <section id="video" class="video-section">
@@ -20,34 +26,31 @@ const YOUTUBE_CHANNEL_URL = 'https://youtube.com/@yurieshiraishiclarinet';
       <p class="video-lead">実際の演奏の雰囲気を、動画でご覧いただけます。</p>
     </div>
 
-    {YOUTUBE_VIDEO_ID ? (
-      /* 動画IDが設定されている場合：レスポンシブ埋め込み */
-      <div class="video-embed-wrap">
-        <iframe
-          src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?rel=0`}
-          title="白石百合恵 演奏動画"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-    ) : (
-      /* 動画IDが未設定の場合：YouTube チャンネルへのリンク */
-      <div class="video-placeholder">
-        <div class="play-icon" aria-hidden="true">
-          <div class="play-triangle"></div>
-        </div>
-        <p class="placeholder-text">演奏動画は YouTube チャンネルでご覧いただけます</p>
-        <a
-          href={YOUTUBE_CHANNEL_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="youtube-link btn-primary"
-        >
-          YouTube で演奏を見る →
-        </a>
-      </div>
-    )}
+    <!-- レスポンシブ YouTube 埋め込み（常に表示） -->
+    <div class="video-embed-wrap">
+      <iframe
+        src={embedSrc}
+        title="白石百合恵 演奏動画"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
+    </div>
+
+    <!-- チャンネルへのリンク -->
+    <div class="video-footer">
+      <a
+        href={YOUTUBE_CHANNEL_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="channel-link"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-2.47 12.06 12.06 0 0 0-8 .29 4.84 4.84 0 0 1-3.81 2.31A4.73 4.73 0 0 0 1 11.75v.5a4.73 4.73 0 0 0 4.73 4.73c.65 0 1.09-.06 1.44-.19a12.32 12.32 0 0 0 3.83.6 12.32 12.32 0 0 0 3.83-.6c.35.13.79.19 1.44.19A4.73 4.73 0 0 0 23 12.25v-.5a4.73 4.73 0 0 0-3.41-5.06ZM9.75 14.25l-3.5-2 3.5-2v4Z"/>
+        </svg>
+        YouTube チャンネルで他の演奏を見る →
+      </a>
+    </div>
   </div>
 </section>
 
@@ -91,53 +94,26 @@ const YOUTUBE_CHANNEL_URL = 'https://youtube.com/@yurieshiraishiclarinet';
     border: 0;
   }
 
-  /* ── プレースホルダー ── */
-  .video-placeholder {
-    position: relative;
-    width: 100%;
-    max-width: 920px;
-    margin: 0 auto;
-    aspect-ratio: 16 / 9;
-    background: var(--navy-dark);
-    border: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-  }
-
-  .play-icon {
-    width: 74px;
-    height: 74px;
-    border-radius: 50%;
-    background: var(--wine);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
-  }
-
-  .play-triangle {
-    width: 0;
-    height: 0;
-    border-left: 20px solid #f6f0e3;
-    border-top: 13px solid transparent;
-    border-bottom: 13px solid transparent;
-    margin-left: 5px;
-  }
-
-  .placeholder-text {
-    font-size: 14px;
-    color: #b3a48f;
-    letter-spacing: 0.06em;
-    margin: 0;
+  /* ── チャンネルリンク ── */
+  .video-footer {
     text-align: center;
-    padding: 0 16px;
+    margin-top: 20px;
   }
 
-  .youtube-link {
+  .channel-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--wine);
+    text-decoration: none;
     font-size: 14px;
-    padding: 12px 24px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .channel-link:hover {
+    border-bottom-color: var(--wine);
   }
 </style>

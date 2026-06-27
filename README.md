@@ -59,13 +59,6 @@ HP制作/
 npm install
 ```
 
-社内ネットワーク等で SSL 証明書エラーが出る場合：
-
-```bash
-npm config set strict-ssl false
-npm install
-```
-
 ### 開発サーバーの起動
 
 ```bash
@@ -98,7 +91,6 @@ npm run preview
 | `astro.config.mjs` | `site:` | 公開する実際のドメインに変更してください（例: `https://yurieshiraishi.com`） |
 | `src/layouts/BaseLayout.astro` | `const SITE_URL` | 同上。OGP・canonical URL に使用されます |
 | `src/components/Video.astro` | `const YOUTUBE_VIDEO_ID` | 埋め込みたい YouTube 動画の ID を設定してください。動画 URL `https://www.youtube.com/watch?v=XXXXX` の `XXXXX` 部分が ID です。空文字のままにするとチャンネルリンクが表示されます |
-| `public/favicon.svg` | ファイル自体 | 正式なファビコン画像（.svg または .ico）に差し替えてください |
 | `public/ogp.jpg` | ファイル自体 | SNS シェア時に表示されるサムネイル画像です。現在は `top.jpg` のコピーです。専用のOGP画像（1200×630px 推奨）があれば差し替えてください |
 | `src/components/Instagram.astro` | コメント箇所 | 特定の投稿を埋め込む場合は、Instagram の「埋め込む」から取得したコードをコメント箇所に貼り付けてください |
 | `src/components/Access.astro` | コメント箇所 | Google マップを埋め込む場合は、Google Maps の「地図を埋め込む」から取得したコードをコメント箇所に有効化してください |
