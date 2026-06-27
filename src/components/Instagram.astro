@@ -1,0 +1,157 @@
+---
+/**
+ * Instagram セクション
+ * プロフィールへのリンク・フォローボタンを表示
+ *
+ * 特定の投稿を埋め込む場合は、Instagram の「埋め込み」コードを
+ * 下記コメント箇所に貼り付けてください。
+ */
+
+const INSTAGRAM_URL = 'https://www.instagram.com/yreee22?igsh=NHo0c2NhMGN3bWpz';
+const INSTAGRAM_HANDLE = '@yreee22';
+---
+
+<section class="insta-section">
+  <div class="insta-inner">
+    <div class="insta-header">
+      <div>
+        <p class="sec-en">Instagram</p>
+        <h2 class="insta-title">演奏と日々のこと</h2>
+      </div>
+      <a
+        href={INSTAGRAM_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="insta-follow btn-outline"
+        aria-label="Instagram をフォロー（新しいタブで開きます）"
+      >
+        Instagram をフォロー →
+      </a>
+    </div>
+
+    <!--
+      ── Instagram 埋め込みを追加する方法 ──
+      1. 埋め込みたい投稿を Instagram で開く
+      2. 右上「…」→「埋め込む」→コードをコピー
+      3. 下記エリアに貼り付け
+      例:
+      <blockquote
+        class="instagram-media"
+        data-instgrm-permalink="https://www.instagram.com/p/XXXXX/"
+        ...
+      ></blockquote>
+      <script async src="//www.instagram.com/embed.js"></script>
+    -->
+
+    <!-- プレースホルダーグリッド（実際の投稿埋め込み後は削除） -->
+    <div class="insta-grid" aria-label="Instagram 投稿グリッド（プレースホルダー）">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <a
+          href={INSTAGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="insta-tile"
+          aria-label={`Instagram 投稿 ${i + 1}（${INSTAGRAM_HANDLE}）`}
+        >
+          <span class="insta-tile-label" aria-hidden="true">Instagram</span>
+        </a>
+      ))}
+    </div>
+
+    <p class="insta-caption">
+      演奏動画や日常の様子を発信しています。<br>
+      <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="insta-handle">{INSTAGRAM_HANDLE}</a>
+      をフォローしてご覧ください。
+    </p>
+  </div>
+</section>
+
+<style>
+  .insta-section {
+    background: var(--cream-light);
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .insta-inner {
+    max-width: var(--max-w-narrow);
+    margin: 0 auto;
+    padding: clamp(56px, 8vw, 100px) var(--px);
+  }
+
+  /* ── ヘッダー行 ── */
+  .insta-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 18px;
+    margin-bottom: clamp(28px, 4vw, 40px);
+  }
+
+  .insta-title {
+    font-family: var(--font-serif-ja);
+    font-weight: 600;
+    font-size: clamp(24px, 4vw, 36px);
+    color: var(--navy);
+    margin: 0;
+    letter-spacing: 0.06em;
+  }
+
+  .insta-follow {
+    font-size: 14px;
+    padding: 12px 24px;
+    white-space: nowrap;
+  }
+
+  /* ── グリッド ── */
+  .insta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: clamp(8px, 1.4vw, 14px);
+  }
+
+  .insta-tile {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: repeating-linear-gradient(
+      45deg,
+      #ece2cd,
+      #ece2cd 11px,
+      #f3ebda 11px,
+      #f3ebda 22px
+    );
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: opacity 0.25s;
+  }
+
+  .insta-tile:hover {
+    opacity: 0.75;
+  }
+
+  .insta-tile-label {
+    font-size: 11px;
+    color: #a4977f;
+    letter-spacing: 0.08em;
+    font-family: ui-monospace, monospace;
+  }
+
+  /* ── キャプション ── */
+  .insta-caption {
+    text-align: center;
+    margin-top: clamp(22px, 3vw, 30px);
+    font-size: 14px;
+    line-height: 2;
+    color: var(--text-muted);
+  }
+
+  .insta-handle {
+    color: var(--wine);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

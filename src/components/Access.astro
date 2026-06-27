@@ -1,0 +1,123 @@
+---
+/**
+ * アクセスセクション
+ * レッスン会場の案内カードを3枚表示
+ */
+
+const accessCards = [
+  {
+    title: 'スタジオレッスン',
+    desc:  '日進駅から徒歩15分の場所でレッスンを行っています。詳しい場所はお申し込み時にご案内します。',
+  },
+  {
+    title: '出張レッスン',
+    desc:  'さいたま市・東京都心部・他要相談へ出張いたします（1時間8,000円・交通費込み）。スタジオ利用時は別途スタジオ代を承ります。',
+  },
+  {
+    title: 'ご自宅訪問',
+    desc:  'ご自宅でのレッスンも可能です。安心してご受講いただくため、ご自宅訪問は女性の方に限らせていただきます。',
+  },
+];
+---
+
+<section id="access" class="access-section">
+  <div class="access-inner">
+    <div class="access-header">
+      <p class="sec-en">Access</p>
+      <h2 class="sec-title">レッスンの場所</h2>
+      <p class="access-lead">
+        スタジオでのレッスンのほか、ご自宅やスタジオへの出張レッスンにも対応しています。
+      </p>
+    </div>
+
+    <div class="access-cards">
+      {accessCards.map(card => (
+        <div class="access-card">
+          <h3 class="access-card-title">{card.title}</h3>
+          <p class="access-card-desc">{card.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <!--
+      TODO: Google マップの埋め込みを追加する場合は以下のコードを有効化してください
+      Google Maps から「地図を埋め込む」のコードを取得して貼り付けます
+
+    <div class="access-map">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=..."
+        width="100%"
+        height="360"
+        style="border:0;"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="レッスン会場 地図"
+      ></iframe>
+    </div>
+    -->
+  </div>
+</section>
+
+<style>
+  .access-section {
+    max-width: var(--max-w-narrow);
+    margin: 0 auto;
+    padding: clamp(60px, 9vw, 110px) var(--px);
+  }
+
+  .access-header {
+    text-align: center;
+    margin-bottom: clamp(36px, 5vw, 52px);
+  }
+
+  .access-lead {
+    font-size: 15px;
+    line-height: 2;
+    color: var(--text-muted);
+    max-width: 32em;
+    margin: 0 auto;
+  }
+
+  /* ── カードグリッド ── */
+  .access-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(18px, 2.5vw, 26px);
+  }
+
+  .access-card {
+    flex: 1 1 260px;
+    min-width: 240px;
+    background: var(--cream-light);
+    border: 1px solid var(--border);
+    padding: clamp(24px, 3vw, 32px);
+  }
+
+  .access-card-title {
+    font-family: var(--font-serif-ja);
+    font-weight: 600;
+    font-size: 19px;
+    color: var(--navy);
+    margin: 0 0 12px;
+  }
+
+  .access-card-desc {
+    font-size: 14px;
+    line-height: 2;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* ── マップ ── */
+  .access-map {
+    margin-top: clamp(36px, 5vw, 48px);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .access-map iframe {
+    display: block;
+    width: 100%;
+  }
+</style>

@@ -1,0 +1,186 @@
+---
+/**
+ * レッスン案内セクション
+ * クラリネット（メイン）・ピアノの2枚カードを横並びで表示
+ */
+
+import { Image } from 'astro:assets';
+import clarinetImage from '../assets/images/clarinet.jpg';
+import pianoImage from '../assets/images/piano.jpg';
+---
+
+<section id="lesson" class="lesson-section">
+  <div class="lesson-inner">
+    <div class="lesson-header">
+      <p class="sec-en">Lessons</p>
+      <h2 class="sec-title">レッスンのご案内</h2>
+      <p class="lesson-lead">
+        クラリネットを中心に、ピアノのレッスンにも対応しています。<br>
+        楽器に初めて触れる方も、もう少し上達したい方も、どうぞお気軽に。
+      </p>
+    </div>
+
+    <div class="lesson-cards">
+      <!-- クラリネット（メイン） -->
+      <article class="lesson-card">
+        <div class="card-image-wrap">
+          <Image
+            src={clarinetImage}
+            alt="白石百合恵 クラリネット演奏"
+            class="card-image"
+            widths={[480, 800]}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="card-body">
+          <span class="card-tag">MAIN</span>
+          <h3 class="card-title">クラリネット</h3>
+          <p class="card-desc">
+            音の出し方や姿勢といった基礎から、憧れの曲まで。一本の楽器とじっくり向き合う時間を、ていねいにサポートします。月1回・月2回、30〜60分から選べます。
+          </p>
+          <p class="card-sub">
+            対象：お子さま〜大人 / 初心者〜中級者<br>
+            学生限定コース・出張レッスンもご用意
+          </p>
+          <a href="#price" class="card-link btn-outline">料金を見る →</a>
+        </div>
+      </article>
+
+      <!-- ピアノ -->
+      <article class="lesson-card">
+        <div class="card-image-wrap">
+          <Image
+            src={pianoImage}
+            alt="白石百合恵 ピアノ演奏"
+            class="card-image"
+            widths={[480, 800]}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="card-body">
+          <span class="card-tag">大人の趣味の方へ</span>
+          <h3 class="card-title">ピアノ</h3>
+          <p class="card-desc">
+            「あの曲を弾いてみたい」「久しぶりにピアノを再開したい」。大人の趣味としてお楽しみいただける単発レッスンです。一曲から、お好きなペースで。
+          </p>
+          <p class="card-sub">
+            対象：大人の趣味の方限定<br>
+            60分・単発でのご利用
+          </p>
+          <a href="#price" class="card-link btn-outline">料金を見る →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .lesson-section {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: var(--py) var(--px);
+  }
+
+  .lesson-header {
+    text-align: center;
+    margin-bottom: clamp(40px, 6vw, 60px);
+  }
+
+  .lesson-lead {
+    font-size: 15.5px;
+    line-height: 2;
+    color: var(--text-muted);
+    max-width: 34em;
+    margin: 0 auto;
+  }
+
+  /* ── カードグリッド ── */
+  .lesson-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(20px, 3vw, 32px);
+    align-items: stretch;
+  }
+
+  .lesson-card {
+    flex: 1 1 320px;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    background: var(--cream-light);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--wine);
+  }
+
+  /* ── カード画像 ── */
+  .card-image-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .lesson-card:hover .card-image {
+    transform: scale(1.03);
+  }
+
+  /* ── カード本文 ── */
+  .card-body {
+    padding: clamp(24px, 3vw, 36px);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .card-tag {
+    display: inline-block;
+    align-self: flex-start;
+    background: var(--wine);
+    color: var(--cream);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    padding: 5px 12px;
+    margin-bottom: 16px;
+  }
+
+  .card-title {
+    font-family: var(--font-serif-ja);
+    font-weight: 600;
+    font-size: clamp(22px, 3vw, 28px);
+    color: var(--navy);
+    margin: 0 0 14px;
+  }
+
+  .card-desc {
+    font-size: 15px;
+    line-height: 2;
+    color: var(--text-lighter);
+    margin: 0 0 18px;
+    flex: 1;
+  }
+
+  .card-sub {
+    font-size: 13.5px;
+    line-height: 1.9;
+    color: var(--text-faint);
+    margin: 0 0 22px;
+  }
+
+  .card-link {
+    align-self: flex-start;
+    font-size: 14px;
+    padding: 12px 25px;
+  }
+</style>

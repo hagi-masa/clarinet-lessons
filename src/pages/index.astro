@@ -1,0 +1,44 @@
+---
+/**
+ * トップページ
+ * 各セクションコンポーネントを組み合わせる
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Profile from '../components/Profile.astro';
+import Video from '../components/Video.astro';
+import Lesson from '../components/Lesson.astro';
+import LessonFlow from '../components/LessonFlow.astro';
+import Price from '../components/Price.astro';
+import Voice from '../components/Voice.astro';
+import Faq from '../components/Faq.astro';
+import Instagram from '../components/Instagram.astro';
+import Access from '../components/Access.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import ScrollToTop from '../components/ScrollToTop.astro';
+import FloatingCta from '../components/FloatingCta.astro';
+---
+
+<BaseLayout>
+  <Header />
+  <main id="top">
+    <Hero />
+    <Profile />
+    <Video />
+    <Lesson />
+    <LessonFlow />
+    <Price />
+    <Voice />
+    <Faq />
+    <Instagram />
+    <Access />
+    <Contact />
+  </main>
+  <Footer />
+  <!-- JS アイランド: スクロール追従ボタン類 -->
+  <ScrollToTop />
+  <FloatingCta />
+</BaseLayout>

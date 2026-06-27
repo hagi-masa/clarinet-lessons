@@ -1,0 +1,190 @@
+---
+/**
+ * フッター
+ * ロゴ・ナビ・連絡先・著作権表記
+ */
+
+const navLinks = [
+  { label: 'プロフィール', href: '#profile' },
+  { label: 'レッスン',     href: '#lesson'  },
+  { label: '料金',         href: '#price'   },
+  { label: 'お客様の声',   href: '#voice'   },
+  { label: 'アクセス',     href: '#access'  },
+  { label: 'お問い合わせ', href: '#contact' },
+];
+
+const INSTAGRAM_URL = 'https://www.instagram.com/yreee22?igsh=NHo0c2NhMGN3bWpz';
+const CURRENT_YEAR  = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <!-- ロゴ・説明 -->
+    <div class="footer-brand">
+      <p class="footer-name">白石 百合恵</p>
+      <p class="footer-sub">Clarinet &amp; Piano</p>
+      <p class="footer-desc">
+        クラリネット・ピアノの個人レッスン。<br>
+        日進駅 徒歩15分 / 出張対応（さいたま市・東京都心部）
+      </p>
+    </div>
+
+    <!-- ナビゲーション -->
+    <nav class="footer-nav" aria-label="フッターナビゲーション">
+      <p class="footer-nav-heading">MENU</p>
+      {navLinks.map(link => (
+        <a href={link.href} class="footer-nav-link">{link.label}</a>
+      ))}
+    </nav>
+
+    <!-- 連絡先 -->
+    <div class="footer-contact">
+      <p class="footer-nav-heading">CONTACT</p>
+      <a href="#contact" class="footer-cta">レッスンを申し込む</a>
+      <div class="footer-sns">
+        <a
+          href={INSTAGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-insta"
+        >
+          Instagram →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- コピーライト -->
+  <div class="footer-copy">
+    <p>© {CURRENT_YEAR} 白石 百合恵 — Clarinet &amp; Piano Lessons</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--navy-darkest);
+    color: #cfc8bc;
+  }
+
+  .footer-inner {
+    max-width: var(--max-w-narrow);
+    margin: 0 auto;
+    padding: clamp(44px, 6vw, 68px) var(--px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
+  }
+
+  /* ── ブランドエリア ── */
+  .footer-brand {
+    flex: 1 1 260px;
+  }
+
+  .footer-name {
+    font-family: var(--font-serif-ja);
+    font-weight: 600;
+    font-size: 20px;
+    color: #fbf7ee;
+    letter-spacing: 0.1em;
+    margin: 0;
+  }
+
+  .footer-sub {
+    font-family: var(--font-serif-en);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--rose);
+    letter-spacing: 0.06em;
+    margin: 4px 0 16px;
+  }
+
+  .footer-desc {
+    font-size: 13px;
+    line-height: 2;
+    color: #b0a48f;
+    margin: 0;
+    max-width: 24em;
+  }
+
+  /* ── ナビ ── */
+  .footer-nav {
+    flex: 0 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .footer-nav-heading {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    color: #a1947f;
+    margin: 0 0 14px;
+  }
+
+  .footer-nav-link {
+    font-size: 13.5px;
+    color: #cfc8bc;
+    text-decoration: none;
+    padding: 5px 0;
+    transition: color 0.25s;
+  }
+
+  .footer-nav-link:hover {
+    color: #fbf7ee;
+  }
+
+  /* ── 連絡先 ── */
+  .footer-contact {
+    flex: 0 1 auto;
+  }
+
+  .footer-cta {
+    display: inline-flex;
+    align-items: center;
+    background: var(--wine);
+    color: var(--cream);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    padding: 13px 26px;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.25s, transform 0.25s;
+  }
+
+  .footer-cta:hover {
+    background: var(--wine-hover);
+    transform: translateY(-2px);
+  }
+
+  .footer-sns {
+    margin-top: 14px;
+  }
+
+  .footer-insta {
+    font-size: 13.5px;
+    color: #cfc8bc;
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+
+  .footer-insta:hover {
+    color: #fbf7ee;
+  }
+
+  /* ── コピーライト ── */
+  .footer-copy {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 18px;
+    text-align: center;
+  }
+
+  .footer-copy p {
+    font-family: var(--font-serif-en);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: #8a7f6e;
+    margin: 0;
+  }
+</style>

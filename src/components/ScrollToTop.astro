@@ -1,0 +1,92 @@
+---
+/**
+ * ページトップへ戻るボタン
+ * 400px 以上スクロールしたら画面右下に表示
+ * JavaScript（最小限）が必要なためこのコンポーネントのみ <script> を使用
+ */
+---
+
+<button
+  id="scroll-to-top"
+  class="scroll-top-btn"
+  aria-label="ページの先頭へ戻る"
+  title="ページの先頭へ"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <polyline points="18 15 12 9 6 15"></polyline>
+  </svg>
+</button>
+
+<script>
+  const btn = document.getElementById('scroll-to-top');
+
+  // スクロール量に応じてボタンを表示・非表示
+  const onScroll = () => {
+    if (window.scrollY > 400) {
+      btn?.classList.add('is-visible');
+    } else {
+      btn?.classList.remove('is-visible');
+    }
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // クリックでスムーズスクロール
+  btn?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+<style>
+  .scroll-top-btn {
+    position: fixed;
+    right: clamp(16px, 3vw, 28px);
+    bottom: clamp(80px, 12vw, 100px);
+    z-index: 55;
+    width: 46px;
+    height: 46px;
+    background: rgba(31, 42, 58, 0.88);
+    color: #f6f0e3;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    /* 初期状態：非表示 */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition: opacity 0.3s, transform 0.3s, background 0.2s;
+  }
+
+  .scroll-top-btn.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .scroll-top-btn:hover {
+    background: rgba(31, 42, 58, 1);
+  }
+
+  /* モバイルでの位置調整（FloatingCta の上に表示） */
+  @media (max-width: 680px) {
+    .scroll-top-btn {
+      bottom: 76px;
+    }
+  }
+</style>

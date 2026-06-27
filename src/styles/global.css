@@ -1,0 +1,148 @@
+/*
+ * グローバルスタイル
+ * デザインのカラーパレット・タイポグラフィ・共通スタイルを定義
+ */
+
+/* ── CSS 変数 ── */
+:root {
+  /* カラー */
+  --cream:         #f6f0e3;
+  --cream-light:   #fffdf7;
+  --navy-darkest:  #16202d;
+  --navy-dark:     #1f2a3a;
+  --navy:          #283549;
+  --wine:          #6e2a36;
+  --wine-hover:    #843340;
+  --rose:          #c98b95;
+  --text:          #2e2925;
+  --text-muted:    #5a534a;
+  --text-lighter:  #4f483f;
+  --text-light:    #9a8f7e;
+  --text-faint:    #7a7268;
+  --border:        #e3d9c6;
+  --border-light:  #ece3d2;
+
+  /* フォント */
+  --font-serif-en: 'Cormorant Garamond', serif;
+  --font-serif-ja: 'Shippori Mincho', serif;
+  --font-sans:     'Noto Sans JP', sans-serif;
+
+  /* レイアウト */
+  --max-w:         1180px;
+  --max-w-narrow:  1100px;
+  --max-w-text:    820px;
+  --px:            clamp(18px, 5vw, 48px);
+  --py:            clamp(60px, 9vw, 116px);
+  --header-h:      72px;
+}
+
+/* ── リセット ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--wine);
+  color: var(--cream);
+}
+
+a {
+  color: inherit;
+}
+
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── セクション共通のスクロールオフセット ── */
+[id] {
+  scroll-margin-top: var(--header-h);
+}
+
+/* ── セクション見出し（英語装飾・日本語タイトルの共通パターン） ── */
+.sec-en {
+  font-family: var(--font-serif-en);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--wine);
+  margin-bottom: 8px;
+}
+
+.sec-title {
+  font-family: var(--font-serif-ja);
+  font-weight: 600;
+  font-size: clamp(26px, 4vw, 40px);
+  color: var(--navy);
+  margin: 0 0 12px;
+  letter-spacing: 0.06em;
+}
+
+/* ── CTA ボタン共通 ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--wine);
+  color: var(--cream);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  padding: 16px 32px;
+  border-radius: 2px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.25s;
+}
+
+.btn-primary:hover {
+  background: var(--wine-hover);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--navy);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  padding: 15px 30px;
+  border-radius: 2px;
+  text-decoration: none;
+  border: 1px solid var(--navy);
+  transition: background 0.25s, color 0.25s, transform 0.25s;
+}
+
+.btn-outline:hover {
+  background: var(--navy);
+  color: var(--cream);
+  transform: translateY(-2px);
+}

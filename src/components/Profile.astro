@@ -1,0 +1,119 @@
+---
+/**
+ * プロフィールセクション
+ * 写真と経歴テキストを横並びで表示
+ */
+
+import { Image } from 'astro:assets';
+import profileImage from '../assets/images/profile.jpg';
+
+// 経歴テキスト（各段落）
+const career = [
+  '3歳よりピアノ、9歳よりクラリネットを始める。埼玉県立大宮光陵高等学校音楽科を経て、桐朋学園大学音楽学部を卒業。',
+  '2017年6月、ヤマハ新人演奏会に出演。第62回東京国際芸術協会新人演奏家オーディションに合格し、新人演奏会に出演。第53回及川音楽事務所新人オーディションにて優秀賞を受賞。',
+  '各地でのコンサートや施設演奏、イベントへの出演のほか、映画音楽のオーケストラや、レコーディング、豪華客船でのショー演奏など、幅広く演奏活動を行っている。',
+  'また、後進の指導にも力を入れており、音楽教室にてピアノ・クラリネット講師として、小学生から大人まで幅広い年代への指導経験を持つ。',
+  'これまでにクラリネットを藤井洋子、西尾郁子、小坂真紀、二宮和子、松本健司の各氏に、ピアノを辻春美、大導寺錬太郎、柏原佳奈の各氏に師事。',
+];
+---
+
+<section id="profile" class="profile-section">
+  <div class="profile-inner">
+    <!-- プロフィール写真 -->
+    <div class="profile-image-wrap">
+      <Image
+        src={profileImage}
+        alt="白石百合恵 プロフィール写真"
+        class="profile-image"
+        widths={[400, 800]}
+        sizes="(max-width: 768px) 100vw, 40vw"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <!-- テキスト -->
+    <div class="profile-text">
+      <p class="sec-en">Profile</p>
+      <h2 class="profile-name">
+        白石 百合恵
+        <span class="profile-role">クラリネット・ピアノ奏者 / 講師</span>
+      </h2>
+      <div class="profile-career">
+        {career.map(para => <p>{para}</p>)}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .profile-section {
+    background: var(--cream-light);
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .profile-inner {
+    max-width: var(--max-w-narrow);
+    margin: 0 auto;
+    padding: var(--py) var(--px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(36px, 5vw, 68px);
+    align-items: flex-start;
+  }
+
+  /* ── 写真 ── */
+  .profile-image-wrap {
+    flex: 1 1 300px;
+    min-width: 280px;
+  }
+
+  .profile-image {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    display: block;
+  }
+
+  /* ── テキスト ── */
+  .profile-text {
+    flex: 1.3 1 380px;
+    min-width: 300px;
+  }
+
+  .profile-name {
+    font-family: var(--font-serif-ja);
+    font-weight: 600;
+    font-size: clamp(26px, 4vw, 40px);
+    color: var(--navy);
+    margin: 0 0 4px;
+    letter-spacing: 0.04em;
+  }
+
+  .profile-role {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.4em;
+    color: var(--text-light);
+    margin-top: 8px;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .profile-career {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 28px;
+    font-size: 15.5px;
+    line-height: 2.15;
+    color: var(--text-lighter);
+  }
+
+  .profile-career p {
+    margin: 0;
+  }
+</style>

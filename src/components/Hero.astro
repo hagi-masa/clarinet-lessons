@@ -1,0 +1,132 @@
+---
+/**
+ * ヒーローセクション（ファーストビュー）
+ * 左：コピー＋CTA、右：トップ写真
+ */
+
+import { Image } from 'astro:assets';
+import topImage from '../assets/images/top.jpg';
+---
+
+<section class="hero" aria-label="ファーストビュー">
+  <div class="hero-inner">
+    <!-- テキストエリア -->
+    <div class="hero-text">
+      <p class="hero-en">Clarinet &amp; Piano Lessons</p>
+      <h1 class="hero-title">
+        心に寄り添う、<br>
+        音楽のレッスン。
+      </h1>
+      <p class="hero-lead">
+        クラリネットとピアノを、初めての方からもう一歩先へ。<br>
+        お一人おひとりのペースに合わせて、ていねいにお伝えします。
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">レッスンを申し込む →</a>
+        <a href="#lesson"  class="btn-outline">レッスンを見る</a>
+      </div>
+    </div>
+
+    <!-- 写真エリア -->
+    <div class="hero-image-wrap">
+      <Image
+        src={topImage}
+        alt="白石百合恵 演奏ポートレート"
+        class="hero-image"
+        widths={[480, 800, 1200]}
+        sizes="(max-width: 768px) 100vw, 50vw"
+        loading="eager"
+        decoding="async"
+      />
+      <!-- デザインアクセント（左下の紺色ブロック） -->
+      <div class="hero-accent" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: clamp(40px, 7vw, 84px) var(--px);
+  }
+
+  .hero-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: clamp(32px, 5vw, 64px);
+  }
+
+  /* ── テキスト ── */
+  .hero-text {
+    flex: 1 1 360px;
+    min-width: 300px;
+  }
+
+  .hero-en {
+    font-family: var(--font-serif-en);
+    font-style: italic;
+    font-size: clamp(20px, 2.4vw, 26px);
+    color: var(--wine);
+    letter-spacing: 0.04em;
+    margin: 0 0 18px;
+  }
+
+  .hero-title {
+    font-family: var(--font-serif-ja);
+    font-weight: 600;
+    font-size: clamp(34px, 6vw, 60px);
+    line-height: 1.5;
+    color: var(--navy);
+    margin: 0 0 24px;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-lead {
+    font-size: clamp(15px, 1.6vw, 17px);
+    line-height: 2.1;
+    color: var(--text-muted);
+    margin: 0 0 36px;
+    max-width: 30em;
+  }
+
+  .hero-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  /* ── 写真エリア ── */
+  .hero-image-wrap {
+    flex: 1 1 360px;
+    min-width: 300px;
+    position: relative;
+  }
+
+  .hero-image {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    display: block;
+  }
+
+  /* デザインアクセント：左下の紺色ブロック */
+  .hero-accent {
+    position: absolute;
+    left: -14px;
+    bottom: -14px;
+    width: 46%;
+    aspect-ratio: 1 / 1;
+    background: var(--navy);
+    z-index: -1;
+  }
+
+  /* ── レスポンシブ ── */
+  @media (max-width: 767px) {
+    .hero-accent {
+      display: none;
+    }
+  }
+</style>

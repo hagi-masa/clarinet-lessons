@@ -1,0 +1,78 @@
+---
+/**
+ * 追従 CTA バー
+ * スマートフォン（680px 以下）の画面下部に常時固定表示
+ * PC では非表示。CSS のみで制御。
+ */
+---
+
+<div class="floating-cta" role="navigation" aria-label="レッスン申し込み（固定）">
+  <a href="#access"  class="floating-cta-sub">アクセス</a>
+  <a href="#contact" class="floating-cta-main">レッスンを申し込む</a>
+</div>
+
+<style>
+  .floating-cta {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    background: rgba(246, 240, 227, 0.96);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid var(--border);
+    padding: 10px 14px;
+    display: none; /* デフォルトは非表示 */
+    gap: 10px;
+  }
+
+  .floating-cta-sub {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--navy);
+    font-weight: 500;
+    font-size: 14px;
+    padding: 13px 18px;
+    border: 1px solid var(--navy);
+    border-radius: 2px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .floating-cta-sub:hover {
+    background: var(--navy);
+    color: var(--cream);
+  }
+
+  .floating-cta-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--wine);
+    color: var(--cream);
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    padding: 13px;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .floating-cta-main:hover {
+    background: var(--wine-hover);
+  }
+
+  /* スマートフォンのみ表示 */
+  @media (max-width: 680px) {
+    .floating-cta {
+      display: flex;
+    }
+  }
+</style>

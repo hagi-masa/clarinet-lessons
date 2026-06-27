@@ -1,0 +1,111 @@
+---
+/**
+ * お客様の声セクション
+ * 生徒・保護者からの声を3枚カードで表示
+ */
+
+const testimonials = [
+  {
+    quote: '楽器に触れるのも初めてでしたが、基礎からていねいに教えていただき、いつの間にか一曲吹けるように。毎回のレッスンが楽しみです。',
+    name:  '大人から始めた生徒さま（クラリネット）',
+  },
+  {
+    quote: '子どもの気持ちに寄り添ってくださるので、毎週レッスンを心待ちにしています。発表会での成長に、親子で感動しました。',
+    name:  '小学生の保護者さま（クラリネット）',
+  },
+  {
+    quote: '長く離れていたピアノを、好きな曲で再開できました。大人の趣味として、無理のないペースで続けられています。',
+    name:  '大人の趣味で再開された生徒さま（ピアノ）',
+  },
+];
+---
+
+<section id="voice" class="voice-section">
+  <div class="voice-inner">
+    <div class="voice-header">
+      <p class="sec-en">Voice</p>
+      <h2 class="voice-title">生徒さん・保護者の声</h2>
+    </div>
+
+    <div class="voice-cards">
+      {testimonials.map(t => (
+        <blockquote class="voice-card">
+          <span class="voice-open-quote" aria-hidden="true">"</span>
+          <p class="voice-quote">{t.quote}</p>
+          <footer class="voice-name">{t.name}</footer>
+        </blockquote>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .voice-section {
+    background: var(--cream-light);
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .voice-inner {
+    max-width: var(--max-w-narrow);
+    margin: 0 auto;
+    padding: clamp(60px, 9vw, 110px) var(--px);
+  }
+
+  .voice-header {
+    text-align: center;
+    margin-bottom: clamp(40px, 6vw, 56px);
+  }
+
+  .voice-title {
+    font-family: var(--font-serif-ja);
+    font-weight: 600;
+    font-size: clamp(26px, 4vw, 38px);
+    color: var(--navy);
+    margin: 0;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── カードグリッド ── */
+  .voice-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(20px, 3vw, 28px);
+  }
+
+  .voice-card {
+    flex: 1 1 280px;
+    min-width: 260px;
+    background: var(--cream);
+    border: 1px solid #e9e0cf;
+    padding: clamp(26px, 3vw, 34px);
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .voice-open-quote {
+    font-family: var(--font-serif-en);
+    font-size: 54px;
+    line-height: 0.6;
+    color: #bd8a92;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .voice-quote {
+    font-size: 15px;
+    line-height: 2.05;
+    color: var(--text-lighter);
+    margin: 0 0 20px;
+    flex: 1;
+  }
+
+  .voice-name {
+    font-size: 12.5px;
+    color: var(--text-faint);
+    letter-spacing: 0.03em;
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+  }
+</style>
