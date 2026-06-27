@@ -12,18 +12,23 @@ import topImage from '../assets/images/top.jpg';
   <div class="hero-inner">
     <!-- テキストエリア -->
     <div class="hero-text">
-      <p class="hero-en">Clarinet &amp; Piano Lessons</p>
-      <h1 class="hero-title">
-        心に寄り添う、<br>
-        音楽のレッスン。
-      </h1>
-      <p class="hero-lead">
-        クラリネットとピアノを、初めての方からもう一歩先へ。<br>
-        お一人おひとりのペースに合わせて、ていねいにお伝えします。
-      </p>
-      <div class="hero-btns">
-        <a href="#contact" class="btn-primary">レッスンを申し込む →</a>
-        <a href="#lesson"  class="btn-outline">レッスンを見る</a>
+      <!-- モバイルでは display:contents により子要素が直接flexアイテムになる -->
+      <div class="hero-text-top">
+        <p class="hero-en">Clarinet &amp; Piano Lessons</p>
+        <h1 class="hero-title">
+          心に寄り添う、<br>
+          音楽のレッスン。
+        </h1>
+      </div>
+      <div class="hero-text-bottom">
+        <p class="hero-lead">
+          クラリネットとピアノを、初めての方からもう一歩先へ。<br>
+          お一人おひとりのペースに合わせて、ていねいにお伝えします。
+        </p>
+        <div class="hero-btns">
+          <a href="#contact" class="btn-primary">レッスンを申し込む →</a>
+          <a href="#lesson"  class="btn-outline">レッスンを見る</a>
+        </div>
       </div>
     </div>
 
@@ -125,6 +130,43 @@ import topImage from '../assets/images/top.jpg';
 
   /* ── レスポンシブ ── */
   @media (max-width: 767px) {
+    /* タイトルの直後に画像が来るよう順序を制御 */
+    .hero-inner {
+      flex-direction: column;
+      flex-wrap: nowrap;
+    }
+
+    /* display:contents で子要素をhero-innerの直接flexアイテムにする */
+    .hero-text {
+      display: contents;
+    }
+
+    .hero-text-top {
+      order: 1;
+    }
+
+    .hero-image-wrap {
+      order: 2;
+      flex: none;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .hero-text-bottom {
+      order: 3;
+    }
+
+    /* タイトル下マージンはgapで代替するためリセット */
+    .hero-title {
+      margin-bottom: 0;
+    }
+
+    /* モバイルでは横長比率にして高さを抑える */
+    .hero-image {
+      aspect-ratio: 3 / 2;
+      object-position: top;
+    }
+
     .hero-accent {
       display: none;
     }

@@ -564,4 +564,69 @@ const notes = [
     text-align: center;
     margin-top: clamp(36px, 5vw, 48px);
   }
+
+  /* ── モバイル：情報密度を高める ── */
+  @media (max-width: 767px) {
+    /* クラリネット3コースを横並び3列にして一覧性を確保 */
+    .clarinet-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .plan-card {
+      padding: 12px 8px;
+    }
+
+    .plan-duration {
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+    }
+
+    .duration-num {
+      font-size: 18px;
+    }
+
+    .plan-rows {
+      gap: 10px;
+    }
+
+    /* ラベルと料金を縦積みにしてカード幅を節約 */
+    .plan-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+    }
+
+    .plan-label {
+      font-size: 10px;
+    }
+
+    .plan-save {
+      font-size: 8px;
+      padding: 1px 4px;
+    }
+
+    /* クラリネットグリッド内の料金数字を縮小 */
+    .price-num {
+      font-size: 18px;
+    }
+
+    .price-unit {
+      font-size: 11px;
+    }
+
+    /* 特別カードの大きな料金数字は適度なサイズに抑える */
+    .special-price-wrap .price-num {
+      font-size: 32px;
+    }
+
+    .special-card {
+      padding: 16px 14px;
+      gap: 12px 16px;
+    }
+
+    .special-title {
+      font-size: 18px;
+    }
+  }
 </style>
