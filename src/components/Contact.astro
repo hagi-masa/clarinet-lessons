@@ -1,8 +1,6 @@
 ---
-/**
- * お問い合わせセクション
- * フォーム送信時に mailto: でメールクライアントを開く
- */
+// お問い合わせセクション
+// フォーム送信時に mailto: でメールクライアントを開く
 
 const CONTACT_EMAIL    = 'clarinet.yurie@gmail.com';
 const INSTAGRAM_URL    = 'https://www.instagram.com/yreee22?igsh=NHo0c2NhMGN3bWpz';
@@ -99,14 +97,14 @@ const MAIL_HREF        = `mailto:${CONTACT_EMAIL}?subject=${MAIL_SUBJECT}`;
 </section>
 
 <!-- フォーム送信処理（メールクライアントを起動） -->
-<script lang="ts">
-  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+<script>
+  const form = document.getElementById('contact-form');
 
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const data = new FormData(form as HTMLFormElement);
-    const get  = (key: string) => ((data.get(key) as string) ?? '').trim();
+    const data = new FormData(form);
+    const get  = (key) => ((data.get(key) ?? '').toString()).trim();
 
     const name    = get('name');
     const email   = get('email');

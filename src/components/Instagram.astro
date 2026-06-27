@@ -41,12 +41,6 @@ const useBeholdWidget = BEHOLD_FEED_ID.length > 0;
       /* ── Behold.so ウィジェット（実際の Instagram 画像を表示） ── */
       <div class="behold-wrap">
         <behold-widget feed-id={`${BEHOLD_FEED_ID}`}></behold-widget>
-        <script>
-          (() => {
-            const d=document,s=d.createElement("script");s.type="module";
-            s.src="https://w.behold.so/widget.js";d.head.append(s);
-          })();
-        </script>
       </div>
     ) : (
       /* ── プレースホルダーグリッド（Behold未設定時） ── */
@@ -93,6 +87,17 @@ const useBeholdWidget = BEHOLD_FEED_ID.length > 0;
     </p>
   </div>
 </section>
+
+<!-- behold-widget 要素がある場合のみ Behold.so スクリプトを動的に読み込む -->
+<!-- is:inline でこの位置（section直後）にインライン配置し、DOM解析後に実行 -->
+<script is:inline>
+  if (document.querySelector('behold-widget')) {
+    var s = document.createElement('script');
+    s.type = 'module';
+    s.src = 'https://w.behold.so/widget.js';
+    document.head.append(s);
+  }
+</script>
 
 <style>
   .insta-section {
