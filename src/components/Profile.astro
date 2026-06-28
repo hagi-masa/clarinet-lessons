@@ -131,8 +131,8 @@ const career = [
     letter-spacing: 0.04em;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+    justify-content: flex-start;
+    gap: 8px;
     flex-wrap: nowrap;
   }
 
@@ -150,13 +150,16 @@ const career = [
   .profile-name-text {
     display: inline-block;
     min-width: 0; /* allow truncation/shrinking on small screens */
+    margin-right: 8px; /* smaller gap to icons for a natural look */
+    flex: 0 1 auto;
   }
 
   .profile-social {
     display: inline-flex;
-    gap: 8px;
-    margin-left: 12px;
+    gap: 6px; /* tighten space between icons */
+    margin-left: 6px; /* reduce empty space after name */
     vertical-align: middle;
+    flex: 0 0 auto;
   }
 
   .profile-social-link {
