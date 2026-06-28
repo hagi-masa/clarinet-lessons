@@ -97,14 +97,18 @@ const MAIL_HREF        = `mailto:${CONTACT_EMAIL}?subject=${MAIL_SUBJECT}`;
 </section>
 
 <!-- フォーム送信処理（メールクライアントを起動） -->
-<script>
+<script lang="ts">
   const form = document.getElementById('contact-form');
 
-  form?.addEventListener('submit', (e) => {
+  if (!(form instanceof HTMLFormElement)) {
+    throw new Error('お問い合わせフォームが見つかりませんでした。');
+  }
+
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const data = new FormData(form);
-    const get  = (key) => ((data.get(key) ?? '').toString()).trim();
+    const get = (key: string) => ((data.get(key) ?? '').toString()).trim();
 
     const name    = get('name');
     const email   = get('email');
